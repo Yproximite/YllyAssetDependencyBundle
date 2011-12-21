@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+
+        <service id="ylly_asset_dependency.assets_manager" class="Ylly\AssetDependencyBundle\Manager\AssetsManager"/>
+
+        <service id="ylly_asset_dependency.twig.extension" class="Ylly\AssetDependencyBundle\Twig\Extension">
+            <argument type="service" id="ylly_asset_dependency.assets_manager"/>
+            <tag name="twig.extension" />
+        </service>
+
+        <service id="ylly_assets_dependency.response_filter" class="Ylly\AssetDependencyBundle\ResponseFilter">
+            <argument type="service" id="ylly_asset_dependency.assets_manager"/>
+            <tag name="kernel.event_listener" event="kernel.response" method="onCoreResponse"/>
+        </service>
+    </services>
+
+</container>
+
+
+
