@@ -21,11 +21,11 @@ class ResponseFilter
 
         $javascriptsHtml = array();
         foreach ($javascripts as $javascript) {
-            $javascriptsHtml[] = '<script type="text/javascript" src="'.$javascript.'"></script>';
+            $javascriptsHtml[] = '<script type="text/javascript" src="'.$this->makeAbsolute($javascript).'"></script>';
         }
         $stylesheetsHtml = array();
         foreach ($stylesheets as $stylesheet) {
-            $stylesheetsHtml[] = '<link rel="stylesheet" type="text/css" href="'.$stylesheet.'"/>';
+            $stylesheetsHtml[] = '<link rel="stylesheet" type="text/css" href="'.$this->makeAbsolute($stylesheet).'"/>';
         }
 
         $content = str_replace(array(
@@ -38,6 +38,24 @@ class ResponseFilter
 
 
         $event->getResponse()->setContent($content);
+    }
+
+
+    /**
+     * Should use the assets helper to generate
+     * the path, but this will do for now.
+     */
+    protected function makeAbsolute($path)
+    {
+        if (substr($path, 0, 7) == 'http://' || substr($path, 0,8) == 'https://') {
+            return $path;
+        }
+
+        if (substr($path, 0, 1) != '/') {
+            $path = '/'.$path;
+        }
+
+        return $path;
     }
 }
 

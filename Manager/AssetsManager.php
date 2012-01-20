@@ -27,7 +27,7 @@ class AssetsManager
             if (isset($this->pathAliases[$type][$alias])) {
                 $resource = $this->pathAliases[$type][$alias];
             } else {
-                throw new \InvalidArgumentException(sprintf('"%s" alias "@%s" specified but has not been configured.', $type, $alias));
+                throw new \InvalidArgumentException(sprintf('"%s" alias "@%s" specified but has not been configured. Configured aliases: %s', $type, $alias, implode(',', array_keys($this->pathAliases[$type]))));
             }
         }
 
