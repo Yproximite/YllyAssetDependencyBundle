@@ -34,6 +34,28 @@ class AssetsManager
         $this->dependencies[$type][$resource] = $resource;
     }
 
+    public function registerStylesheet($stylesheets)
+    {
+        if (is_array($stylesheets)) {
+            foreach ($stylesheets as $stylesheet) {
+                $this->register('stylesheet', $stylesheet);
+            }
+        } else {
+            $this->register('stylesheet', $stylesheets);
+        }
+    }
+
+    public function registerJavascript($javascripts)
+    {
+        if (is_array($javascripts)) {
+            foreach ($javascripts as $javascript) {
+                $this->register('javascript', $javascript);
+            }
+        } else {
+            $this->register('javascript', $javascripts);
+        }
+    }
+
     public function getDependencies($type)
     {
         if (isset($this->dependencies[$type])) {
