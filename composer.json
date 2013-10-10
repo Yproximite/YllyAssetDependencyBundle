@@ -1,0 +1,12 @@
+{
+    "name": "yproximite/asset-dependency-bundle",
+    "authors": [
+        {
+            "name": "Daniel Leech",
+            "email": "daniel@yproximite.com"
+        }
+    ],
+    "require": {
+
+    }
+}
