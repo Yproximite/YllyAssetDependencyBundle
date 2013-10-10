@@ -8,5 +8,8 @@
     ],
     "require": {
 
+    },
+    "autoload": {
+        "psr-0": { "Ylly\\AssetDependencyBundle": "" }
     }
 }
