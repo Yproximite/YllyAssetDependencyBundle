@@ -9,6 +9,7 @@
     "require": {
 
     },
+    "target-dir": "Ylly/AssetDependencyBundle",
     "autoload": {
         "psr-0": { "Ylly\\AssetDependencyBundle": "" }
     }
