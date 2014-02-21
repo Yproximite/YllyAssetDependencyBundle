@@ -20,7 +20,7 @@ class AssetsManager
         $this->pathAliases[$type][$alias] = $path;
     }
 
-    public function register($type, $resource)
+    public function resolveResource($type, $resource)
     {
         if (substr($resource, 0 ,1) == '@') {
             $alias = substr($resource, 1);
@@ -31,6 +31,12 @@ class AssetsManager
             }
         }
 
+        return $resource;
+    }
+
+    public function register($type, $resource)
+    {
+        $resource = $this->resolveResource($type, $resource);
         $this->dependencies[$type][$resource] = $resource;
     }
 
