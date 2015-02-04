@@ -1,7 +1,9 @@
 <?php
 
 namespace Ylly\AssetDependencyBundle;
+
 use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
+
 use Ylly\AssetDependencyBundle\Manager\AssetsManager;
 
 class ResponseFilter
@@ -16,14 +18,21 @@ class ResponseFilter
     public function onCoreResponse(FilterResponseEvent $event)
     {
         $content = $event->getResponse()->getContent();
+
+        if ($content == "") {
+            return;
+        }
+
         $javascripts = $this->assetsManager->getDependencies('javascript');
         $stylesheets = $this->assetsManager->getDependencies('stylesheet');
 
         $javascriptsHtml = array();
+        $stylesheetsHtml = array();
+
         foreach ($javascripts as $javascript) {
             $javascriptsHtml[] = '<script type="text/javascript" src="'.$this->makeAbsolute($javascript).'"></script>';
         }
-        $stylesheetsHtml = array();
+
         foreach ($stylesheets as $stylesheet) {
             $stylesheetsHtml[] = '<link rel="stylesheet" type="text/css" href="'.$this->makeAbsolute($stylesheet).'"/>';
         }
@@ -47,7 +56,7 @@ class ResponseFilter
      */
     protected function makeAbsolute($path)
     {
-        if (substr($path, 0, 7) == 'http://' || substr($path, 0,8) == 'https://') {
+        if (substr($path, 0, 7) == 'http://' || substr($path, 0, 8) == 'https://') {
             return $path;
         }
 
@@ -58,4 +67,3 @@ class ResponseFilter
         return $path;
     }
 }
-
