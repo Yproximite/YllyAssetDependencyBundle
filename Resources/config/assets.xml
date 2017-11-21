@@ -6,14 +6,14 @@
 
     <services>
 
-        <service id="ylly_asset_dependency.assets_manager" class="Ylly\AssetDependencyBundle\Manager\AssetsManager"/>
+        <service id="ylly_asset_dependency.assets_manager" class="Ylly\AssetDependencyBundle\Manager\AssetsManager" public="true"/>
 
-        <service id="ylly_asset_dependency.twig.extension" class="Ylly\AssetDependencyBundle\Twig\Extension">
+        <service id="ylly_asset_dependency.twig.extension" class="Ylly\AssetDependencyBundle\Twig\Extension" public="true">
             <argument type="service" id="ylly_asset_dependency.assets_manager"/>
             <tag name="twig.extension" />
         </service>
 
-        <service id="ylly_assets_dependency.response_filter" class="Ylly\AssetDependencyBundle\ResponseFilter">
+        <service id="ylly_assets_dependency.response_filter" class="Ylly\AssetDependencyBundle\ResponseFilter" public="true">
             <argument type="service" id="ylly_asset_dependency.assets_manager"/>
             <tag name="kernel.event_listener" event="kernel.response" method="onCoreResponse"/>
         </service>
